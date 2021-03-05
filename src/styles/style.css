@@ -1,0 +1,32 @@
+#nav-bar{
+    background-color: #DB4C3F;
+    padding: 5px 40px;
+    display: flex;
+    justify-content: space-between;
+    z-index: top;    
+}
+.nav-icon-group{
+    display: flex;
+}
+.nav-icon{
+    color: #FFFFFF;
+    font-size: 22px;    
+    padding: 0px 4px;
+}
+.nav-icon:hover{
+    background-color: #E27065;
+    border-radius: 5px;
+}
+#lateral-bar{
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    left: 0;    
+    height: calc(100% - 43px);
+    width: 0px;
+    transition: all .3s ease;    
+}
+.lateral-bar-active{    
+    width: 305px !important; 
+    padding-left: 35px;
+}
