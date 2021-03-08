@@ -18,15 +18,21 @@
     border-radius: 5px;
 }
 #lateral-bar{
-    background-color: black;
+    /*background-color: black;*/
+    background-color: #F7F7F7;
     position: fixed;
     bottom: 0;
     left: 0;    
     height: calc(100% - 43px);
     width: 0px;
-    transition: all .3s ease;    
+    transition: width .1s;
+    opacity: 0;
 }
 .lateral-bar-active{    
     width: 305px !important; 
     padding-left: 35px;
+    opacity: 1 !important;
+}
+.list-menu-elem{
+    list-style-type: none;
 }
