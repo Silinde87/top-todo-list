@@ -20,35 +20,51 @@
 }
 
 /* LATERAL BAR STYLES */
-#lateral-bar{
-    /*background-color: black;*/
+#lateral-bar{    
     background-color: #F7F7F7;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;    
     height: calc(100% - 43px);
-    width: 0px;
-    transition: width .1s ease-in-out;
-    opacity: 0;
+    transition: all .2s ease;
+    transform: translateX(-335px);
 }
-.lateral-bar-active{    
-    width: 305px !important; 
-    padding-left: 35px;
-    opacity: 1 !important;
+.active-lateral-bar{
+    transform: translateX(0px) !important;
 }
 .list-menu-elem{
-    list-style-type: none;
-    margin: 8px 0px;
+    list-style-type: none;    
+    margin-right: 4px;
+    padding: 4px 0px 4px 6px;
+    transition: background-color .3s;
+    display: flex;
+}
+.list-menu-elem:hover,
+.accordion-list-elem:hover{
+    background-color: white;
+    border-radius: 3px;
 }
 #list-menu{
     padding-top: 30px;
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 5px;
 }
 .menu-icon{
     margin-right: 10px;
+    font-size: 18px;
 }
+#today-icon{
+    color: #058527;
 
+}
+#inbox-icon{
+    color: #246FE0;
+
+}
+#projects-text{
+    font-weight: 700;
+    margin-right: 170px;
+}
 #projects-icon::before{
     transition: transform 0.1s;
 }
@@ -56,10 +72,13 @@
     transform: rotate(-90deg);    
 }
 #project-add{
-    float: right;
     margin-right: 15px;
     opacity: 0;
-    transition: opacity 0.1s;
+    transition: opacity 0.3s;
+    font-size: 18px;
+}
+#project-add:hover{
+    color: #058527;
 }
 .project-add-show{
     opacity: 1 !important;
@@ -69,5 +88,33 @@
     padding-left: 65px;
 }
 .accordion-list-elem{
-    margin-bottom: 5px;
+    padding: 4px 0px 4px 6px;
+    margin-right: 4px;
+    min-width: 260px;
+    color: #444;
+}
+.remove-icon{
+    float: right;
+    margin-right: 15px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 18px;
+}
+.remove-icon:hover{
+    color: #E27065;
+}
+.remove-icon-show{
+    opacity: 1 !important;
+}
+
+/* CONTAINER LIST STYLES */
+#container-list{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    transition: padding .2s;
+}
+.toggle-container{
+    padding-left: 335px;
 }
