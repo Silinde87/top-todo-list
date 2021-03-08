@@ -1,3 +1,4 @@
+/* NAV BAR STYLES */
 #nav-bar{
     background-color: #DB4C3F;
     padding: 5px 40px;
@@ -17,6 +18,8 @@
     background-color: #E27065;
     border-radius: 5px;
 }
+
+/* LATERAL BAR STYLES */
 #lateral-bar{
     /*background-color: black;*/
     background-color: #F7F7F7;
@@ -25,7 +28,7 @@
     left: 0;    
     height: calc(100% - 43px);
     width: 0px;
-    transition: width .1s;
+    transition: width .1s ease-in-out;
     opacity: 0;
 }
 .lateral-bar-active{    
@@ -35,4 +38,36 @@
 }
 .list-menu-elem{
     list-style-type: none;
+    margin: 8px 0px;
+}
+#list-menu{
+    padding-top: 30px;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.menu-icon{
+    margin-right: 10px;
+}
+
+#projects-icon::before{
+    transition: transform 0.1s;
+}
+.rotate::before{
+    transform: rotate(-90deg);    
+}
+#project-add{
+    float: right;
+    margin-right: 15px;
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+.project-add-show{
+    opacity: 1 !important;
+}
+#accordion-list{
+    list-style-type: none;
+    padding-left: 65px;
+}
+.accordion-list-elem{
+    margin-bottom: 5px;
 }

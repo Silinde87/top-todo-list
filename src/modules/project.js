@@ -1,4 +1,4 @@
-// -- TASK OBJECT (Factory) --
+// -- PROJECT OBJECT (Factory) --
 export const Project = (name) => {
 	let projectName = name;
 	let projectTasks = [];

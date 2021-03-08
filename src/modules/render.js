@@ -49,7 +49,7 @@ function renderLateralMenuBar() {
 	const listMenuElem = createHtmlElement("ul", "list-menu", null, null);
 	const inboxListElem = createHtmlElement("li", null, ["list-menu-elem"], null);
 	const todayListElem = createHtmlElement("li", null, ["list-menu-elem"], null);
-	const projectsListElem = createHtmlElement("li", null, ["list-menu-elem"], null);
+	const projectsListElem = createHtmlElement("div", "projects-list", ["list-menu-elem"], null);
 
 	//Creates icons and text element for list's elements.
 	const inboxIconElem = createHtmlElement("span", null, ["menu-icon"], null);
@@ -59,8 +59,10 @@ function renderLateralMenuBar() {
 	todayIconElem.innerHTML = '<i class="bi bi-calendar-day"></i>';
 	const todayTextElem = createHtmlElement("span", null, ["menu-text"], "Today");
 	const projectsIconElem = createHtmlElement("span", null, ["menu-icon"], null);
-	projectsIconElem.innerHTML = '<i class="bi bi-calendar3"></i>';
+	projectsIconElem.innerHTML = '<i id="projects-icon" class="bi bi-chevron-down"></i>';
 	const projectsTextElem = createHtmlElement("span", null, ["menu-text"], "Projects");
+	const projectAddIconElem = createHtmlElement("span", "project-add", null, null);
+	projectAddIconElem.innerHTML = '<i class="bi bi-plus-circle"></i>';
 
 	//Accordion attributes from projectListElem
 	projectsListElem.setAttribute("data-bs-toggle", "collapse");
@@ -86,6 +88,7 @@ function renderLateralMenuBar() {
 	todayListElem.appendChild(todayTextElem);
 	projectsListElem.appendChild(projectsIconElem);
 	projectsListElem.appendChild(projectsTextElem);
+	projectsListElem.appendChild(projectAddIconElem);
 
 	listMenuElem.appendChild(inboxListElem);
 	listMenuElem.appendChild(todayListElem);
@@ -99,9 +102,9 @@ function renderLateralMenuBar() {
 
 //Assist function. Creates project list element and returns it.
 function renderProjectList(projects) {
-	const projectList = createHtmlElement("ul", null, null, null);
+	const projectList = createHtmlElement("ul", "accordion-list", null, null);
 	projects.forEach((project) => {
-		const projectElem = createHtmlElement("li", null, null, project.getProjectName());
+		const projectElem = createHtmlElement("li", null, ["accordion-list-elem"], project.getProjectName());
 		projectList.appendChild(projectElem);
 	});
 
