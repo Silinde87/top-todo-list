@@ -1,5 +1,8 @@
+import { generateID } from "../functions/tools.js";
+
 // -- TASK OBJECT (Factory) --
 const Task = (title, description, scheduleDate, project, priority) => {
+	let id = generateID();
 	let titleTask = title;
 	let descriptionTask = description;
 	let scheduleDateTask = scheduleDate;
@@ -7,6 +10,7 @@ const Task = (title, description, scheduleDate, project, priority) => {
 	let priorityTask = priority;
 
 	//getters
+	const getId = () => id;
 	const getTitle = () => titleTask;
 	const getDescription = () => descriptionTask;
 	const getScheduleDate = () => scheduleDateTask;
@@ -21,6 +25,7 @@ const Task = (title, description, scheduleDate, project, priority) => {
 	const setPriorityFromTask = (param) => (priorityTask = param);
 
 	return {
+		getId,
 		getTitle,
 		getDescription,
 		getScheduleDate,

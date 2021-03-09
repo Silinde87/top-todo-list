@@ -12,4 +12,8 @@ function createHtmlElement(type, id, arrayClasses, content) {
 	return element;
 }
 
-export { createHtmlElement };
+function generateID() {
+	return "_" + Math.random().toString(36).substr(2, 9);
+}
+
+export { createHtmlElement, generateID };

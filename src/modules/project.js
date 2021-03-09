@@ -1,9 +1,13 @@
+import { generateID } from "../functions/tools.js";
+
 // -- PROJECT OBJECT (Factory) --
 export const Project = (name) => {
+	let id = generateID();
 	let projectName = name;
 	let projectTasks = [];
 
 	//getters
+	const getProjectId = () => id;
 	const getProjectName = () => projectName;
 	const getProjectTasks = () => projectTasks;
 
@@ -14,5 +18,5 @@ export const Project = (name) => {
 		projectTasks.push(task);
 	};
 
-	return { getProjectName, getProjectTasks, setProjectName, addTaskToProject };
+	return { getProjectId, getProjectName, getProjectTasks, setProjectName, addTaskToProject };
 };

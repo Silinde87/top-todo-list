@@ -1,50 +1,9 @@
-import css from "../styles/style.css";
 
-import { $content, $projects } from "../index.js";
+import css from "../styles/style.css";
+import { $projects } from "../index.js";
 import { createHtmlElement } from "../functions/tools.js";
 
-let navBarElem, lateralMenuBarElem, containerListElem;
-
-function renderMain() {
-	$content.appendChild(renderNavBar());
-	$content.appendChild(renderLateralMenuBar());
-	$content.appendChild(renderContainerList());
-}
-
-//Creates top nav bar and returns the DOM Element
-function renderNavBar() {
-	navBarElem = createHtmlElement("nav", "nav-bar", null, null);
-
-	//Creates group of Icons.
-	const leftGroupIconElem = createHtmlElement("div", "left-group-icon", ["nav-icon-group"], null);
-	const rightGroupIconElem = createHtmlElement("div", "right-group-icon", ["nav-icon-group"], null);
-
-	//Creates divs which contain every icon.
-	const hamBarsIconElem = createHtmlElement("div", null, ["nav-icon"], null);
-	hamBarsIconElem.innerHTML = '<i class="bi bi-list"></i>';
-	const homeIconElem = createHtmlElement("div", null, ["nav-icon"], null);
-	homeIconElem.innerHTML = '<i class="bi bi-house-door"></i>';
-	const addIconElem = createHtmlElement("div", null, ["nav-icon"], null);
-	addIconElem.innerHTML = '<i class="bi bi-plus"></i>';
-	const completedIconElem = createHtmlElement("div", null, ["nav-icon"], null);
-	completedIconElem.innerHTML = '<i class="bi bi-calendar-check"></i>';
-
-	leftGroupIconElem.appendChild(hamBarsIconElem);
-	leftGroupIconElem.appendChild(homeIconElem);
-	rightGroupIconElem.appendChild(addIconElem);
-	rightGroupIconElem.appendChild(completedIconElem);
-
-	navBarElem.appendChild(leftGroupIconElem);
-	navBarElem.appendChild(rightGroupIconElem);
-
-	//event listeners of nav bar
-	hamBarsIconElem.onclick = () => {
-		lateralMenuBarElem.classList.toggle("active-lateral-bar");
-		containerListElem.classList.toggle("toggle-container");
-	};
-
-	return navBarElem;
-}
+let lateralMenuBarElem;
 
 //Creates lateral Menu Bar and returns the DOM Element
 function renderLateralMenuBar() {
@@ -116,9 +75,10 @@ function renderProjectList(projects) {
 
 	projects.forEach((project) => {
 		const projectElem = createHtmlElement("li", null, ["accordion-list-elem"], null);
-		const projectNameElem = createHtmlElement("span", null, null, project.getProjectName());
-		const removeIconID = `remove ${project.getProjectName()}`;
-		const removeIconElem = createHtmlElement("span", removeIconID, ["remove-icon"], null);
+		projectElem.dataset.id = project.getProjectId();
+		const projectNameElem = createHtmlElement("span", null, null, project.getProjectName());		
+		const removeIconElem = createHtmlElement("span", null, ["remove-icon"], null);
+		removeIconElem.dataset.id = project.getProjectId();
 		removeIconElem.innerHTML = '<i class="bi bi-dash-circle"></i>';
 		projectElem.appendChild(projectNameElem);
 		projectElem.appendChild(removeIconElem);
@@ -131,12 +91,4 @@ function renderProjectList(projects) {
 	return projectList;
 }
 
-function renderContainerList() {
-	containerListElem = createHtmlElement("div", "container-list", null, null);
-	const testElem = createHtmlElement("span", null, null, "THIS IS FOR TESTING PURPOSES")
-	containerListElem.appendChild(testElem);
-
-	return containerListElem;
-}
-
-export { renderMain };
+export { renderLateralMenuBar };
