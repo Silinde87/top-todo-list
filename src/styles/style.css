@@ -63,7 +63,7 @@
 }
 #projects-text{
     font-weight: 700;
-    margin-right: 170px;
+    padding-right: 170px;
 }
 #projects-icon::before{
     transition: transform 0.1s;

@@ -20,6 +20,10 @@ function renderNavBar() {
 	const completedIconElem = createHtmlElement("div", null, ["nav-icon"], null);
 	completedIconElem.innerHTML = '<i class="bi bi-calendar-check"></i>';
 
+	//Modal attributes
+	addIconElem.setAttribute("data-bs-toggle", "modal");
+	addIconElem.setAttribute("data-bs-target", "#create-task-modal");
+
 	leftGroupIconElem.appendChild(hamBarsIconElem);
 	leftGroupIconElem.appendChild(homeIconElem);
 	rightGroupIconElem.appendChild(addIconElem);
