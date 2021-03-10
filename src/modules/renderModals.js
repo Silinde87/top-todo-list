@@ -1,12 +1,11 @@
 import { createHtmlElement } from "../functions/tools.js";
 import { $projects } from "../index.js";
-import { removeProject, addProject } from "../modules/project.js";
 
-let createProjectModalElem, createTaskModalElem;
+let createProjectForm, createTaskForm;
 
 //Generates the Create Project Modal
 function createProjectModal() {
-	createProjectModalElem = createModalElement("create-project-modal");
+	let createProjectModalElem = createModalElement("create-project-modal");
 
 	const modalHeader = createProjectModalElem.querySelector(".modal-header");
 	const modalBody = createProjectModalElem.querySelector(".modal-body");
@@ -17,15 +16,14 @@ function createProjectModal() {
 	modalHeader.appendChild(modalTitle);
 
 	//BODY
-	const createProjectForm = createHtmlElement("form", "create-project-form", null, null);
+	createProjectForm = createHtmlElement("form", "create-project-form", null, null);
 	createProjectForm.setAttribute("method", "GET");
 
 	const formGroupProjectName = createHtmlElement("div", null, ["mb-3"], null);
 	const labelProjectName = createHtmlElement("label", null, ["form-label"], "Project Name");
 	labelProjectName.setAttribute("for", "project-name");
 	const inputProjectName = createHtmlElement("input", "project-name", ["form-control"], null);
-	inputProjectName.setAttribute("type", "text");
-	inputProjectName.required = true;
+	inputProjectName.setAttribute("type", "text");	
 
 	formGroupProjectName.appendChild(labelProjectName);
 	formGroupProjectName.appendChild(inputProjectName);
@@ -38,16 +36,12 @@ function createProjectModal() {
 	addButton.setAttribute("id", "add-project-btn");
 	addButton.setAttribute("form", "create-project-form");
 
-	addButton.addEventListener("click", (e) => {
-		//addProject(inputProjectName.value);
-	});
-
 	return createProjectModalElem;
 }
 
 //Generates the Create Task Modal
 function createTaskModal() {
-	createTaskModalElem = createModalElement("create-task-modal");
+	let createTaskModalElem = createModalElement("create-task-modal");
 
 	const modalHeader = createTaskModalElem.querySelector(".modal-header");
 	const modalBody = createTaskModalElem.querySelector(".modal-body");
@@ -58,7 +52,7 @@ function createTaskModal() {
 	modalHeader.appendChild(modalTitle);
 
 	//BODY
-	const createTaskForm = createHtmlElement("form", "create-task-form", null, null);
+	createTaskForm = createHtmlElement("form", "create-task-form", null, null);
 	createTaskForm.setAttribute("method", "GET");
 
 	//Form Task Title
@@ -66,8 +60,7 @@ function createTaskModal() {
 	const labelTaskTitle = createHtmlElement("label", null, ["form-label"], "Title");
 	labelTaskTitle.setAttribute("for", "task-title");
 	const inputTaskTitle = createHtmlElement("input", "task-title", ["form-control"], null);
-	inputTaskTitle.setAttribute("type", "text");
-	inputTaskTitle.required = true;
+	inputTaskTitle.setAttribute("type", "text");	
 	formGroupTaskTitle.appendChild(labelTaskTitle);
 	formGroupTaskTitle.appendChild(inputTaskTitle);
 
@@ -76,8 +69,7 @@ function createTaskModal() {
 	const labelTaskDescription = createHtmlElement("label", null, ["form-label"], "Description");
 	labelTaskDescription.setAttribute("for", "task-title");
 	const inputTaskDescription = createHtmlElement("textarea", "task-description", ["form-control"], null);
-	inputTaskDescription.setAttribute("rows", "3");
-	inputTaskDescription.required = true;
+	inputTaskDescription.setAttribute("rows", "3");	
 	formGroupTaskDescription.appendChild(labelTaskDescription);
 	formGroupTaskDescription.appendChild(inputTaskDescription);
 
@@ -169,4 +161,4 @@ function createModalElement(id) {
 	return modalElem;
 }
 
-export { createProjectModal, createTaskModal };
+export { createProjectModal, createTaskModal, createProjectForm, createTaskForm };

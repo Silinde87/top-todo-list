@@ -1,8 +1,10 @@
 import css from "../styles/style.css";
 import { $projects } from "../index.js";
 import { createHtmlElement } from "../functions/tools.js";
+import { removeProject } from "./project";
 
 let lateralMenuBarElem;
+let $removeIcons = [];
 
 //Creates lateral Menu Bar and returns the DOM Element
 function renderLateralMenuBar() {
@@ -75,6 +77,7 @@ function renderLateralMenuBar() {
 //Assist function. Creates project list element and returns it.
 function renderProjectList(projects) {
 	const projectList = createHtmlElement("ul", "accordion-list", null, null);
+	$removeIcons = [];
 
 	projects.forEach((project) => {
 		const projectElem = createHtmlElement("li", null, ["accordion-list-elem"], null);
@@ -83,15 +86,26 @@ function renderProjectList(projects) {
 		const removeIconElem = createHtmlElement("span", null, ["remove-icon"], null);
 		removeIconElem.dataset.id = project.getProjectId();
 		removeIconElem.innerHTML = '<i class="bi bi-dash-circle"></i>';
+
+		$removeIcons.push(removeIconElem);
+
 		projectElem.appendChild(projectNameElem);
 		projectElem.appendChild(removeIconElem);
 		projectList.appendChild(projectElem);
 
+		//Show and hide the remove icon
 		projectElem.onmouseover = () => removeIconElem.classList.add("remove-icon-show");
 		projectElem.onmouseout = () => removeIconElem.classList.remove("remove-icon-show");
+
+		//Remove Project icon functionality
+		removeIconElem.onclick = () => {
+			removeProject(removeIconElem.dataset.id);
+			document.querySelector("#collapseOne").innerHTML = "";
+			document.querySelector("#collapseOne").appendChild(renderProjectList($projects));
+		};
 	});
 
 	return projectList;
 }
 
-export { renderLateralMenuBar, renderProjectList};
+export { renderLateralMenuBar, renderProjectList };
