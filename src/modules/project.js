@@ -1,4 +1,5 @@
 import { generateID } from "../functions/tools.js";
+import { $projects } from "../index.js";
 
 // -- PROJECT OBJECT (Factory) --
 export const Project = (name) => {
@@ -20,3 +21,14 @@ export const Project = (name) => {
 
 	return { getProjectId, getProjectName, getProjectTasks, setProjectName, addTaskToProject };
 };
+
+function addProject(projectName) {
+	$projects.push(Project(projectName));
+}
+
+function removeProject(project) {
+	let index = $projects.indexOf(project);
+	$projects.slice(index, 1);
+}
+
+export { addProject, removeProject };

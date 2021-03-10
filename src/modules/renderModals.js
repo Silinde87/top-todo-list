@@ -1,5 +1,6 @@
 import { createHtmlElement } from "../functions/tools.js";
 import { $projects } from "../index.js";
+import { removeProject, addProject } from "../modules/project.js";
 
 let createProjectModalElem, createTaskModalElem;
 
@@ -35,6 +36,11 @@ function createProjectModal() {
 	//FOOTER
 	const addButton = modalFooter.querySelector(".btn-primary");
 	addButton.setAttribute("id", "add-project-btn");
+	addButton.setAttribute("form", "create-project-form");
+
+	addButton.addEventListener("click", (e) => {
+		//addProject(inputProjectName.value);
+	});
 
 	return createProjectModalElem;
 }
@@ -114,15 +120,18 @@ function createTaskModal() {
 	formGroupTaskProject.appendChild(labelTaskProject);
 	formGroupTaskProject.appendChild(inputTaskProject);
 
-	modalBody.appendChild(formGroupTaskTitle);
-	modalBody.appendChild(formGroupTaskDescription);
-	modalBody.appendChild(formGroupTaskDate);
-	modalBody.appendChild(formGroupTaskPriority);
-	modalBody.appendChild(formGroupTaskProject);
+	createTaskForm.appendChild(formGroupTaskTitle);
+	createTaskForm.appendChild(formGroupTaskDescription);
+	createTaskForm.appendChild(formGroupTaskDate);
+	createTaskForm.appendChild(formGroupTaskPriority);
+	createTaskForm.appendChild(formGroupTaskProject);
+
+	modalBody.appendChild(createTaskForm);
 
 	//FOOTER
 	const addButton = modalFooter.querySelector(".btn-primary");
 	addButton.setAttribute("id", "add-task-btn");
+	addButton.setAttribute("form", "create-task-form");
 
 	return createTaskModalElem;
 }
@@ -143,7 +152,7 @@ function createModalElement(id) {
 	const divFooter = createHtmlElement("div", null, ["modal-footer"], null);
 
 	const addButton = createHtmlElement("button", null, ["btn", "btn-primary"], "Add");
-	addButton.setAttribute("type", "button");
+	addButton.setAttribute("type", "submit");
 	const closeButton = createHtmlElement("button", null, ["btn", "btn-secondary"], "Close");
 	closeButton.setAttribute("type", "button");
 	closeButton.setAttribute("data-bs-dismiss", "modal");

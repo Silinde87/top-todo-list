@@ -94,4 +94,4 @@ function renderProjectList(projects) {
 	return projectList;
 }
 
-export { renderLateralMenuBar };
+export { renderLateralMenuBar, renderProjectList};
