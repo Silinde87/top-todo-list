@@ -3,6 +3,7 @@ import { $projects } from "../index.js";
 import { createHtmlElement } from "../functions/tools.js";
 import { removeProject } from "./project";
 import { renderProjectListAtTaskModal } from "../modules/renderModals";
+import { renderContainerList } from "../modules/renderContainerList";
 
 let lateralMenuBarElem;
 let $removeIcons = [];
@@ -71,6 +72,15 @@ function renderLateralMenuBar() {
 	projectsTextElem.onclick = () => document.querySelector("#projects-icon").classList.toggle("rotate");
 	projectsListElem.onmouseover = () => projectAddIconElem.classList.add("project-add-show");
 	projectsListElem.onmouseout = () => projectAddIconElem.classList.remove("project-add-show");
+	//Inbox and today event listeners from lateral bar.
+	inboxListElem.onclick = (e) => {
+		let containerListElem = document.querySelector("#container-list");
+		containerListElem.replaceWith(renderContainerList(e));
+	};
+	todayListElem.onclick = (e) => {
+		let containerListElem = document.querySelector("#container-list");
+		containerListElem.replaceWith(renderContainerList(e));
+	};
 
 	return lateralMenuBarElem;
 }

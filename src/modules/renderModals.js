@@ -156,9 +156,7 @@ function createModalElement(id) {
 }
 
 //Renders the project list at task modal
-function renderProjectListAtTaskModal(inputTaskProjectElem){	
-	console.log(inputTaskProjectElem);
-	
+function renderProjectListAtTaskModal(inputTaskProjectElem){		
 	inputTaskProjectElem.innerHTML = `<option disabled selected> -- Select project -- </option>`;	
 	$projects.forEach((project) => {
 		//Get every project from projects.

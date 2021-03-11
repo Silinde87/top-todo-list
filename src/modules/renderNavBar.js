@@ -13,8 +13,8 @@ function renderNavBar() {
 	//Creates divs which contain every icon.
 	const hamBarsIconElem = createHtmlElement("div", "ham-btn", ["nav-icon"], null);
 	hamBarsIconElem.innerHTML = '<i class="bi bi-list"></i>';
-	const homeIconElem = createHtmlElement("div", null, ["nav-icon"], null);
-	homeIconElem.innerHTML = '<i class="bi bi-house-door"></i>';
+	const homeIconElem = createHtmlElement("div", "home-btn", ["nav-icon"], null);
+	homeIconElem.innerHTML = '<i id="home-btn" class="bi bi-house-door"></i>';
 	const addIconElem = createHtmlElement("div", null, ["nav-icon"], null);
 	addIconElem.innerHTML = '<i class="bi bi-plus"></i>';
 	const completedIconElem = createHtmlElement("div", null, ["nav-icon"], null);
