@@ -1,11 +1,13 @@
 import { addProject } from "../modules/project.js";
+import { addTask } from "../modules/task.js";
 import { createProjectForm, createTaskForm } from "../modules/renderModals.js";
 
-let $projectModal;
+let $projectModal, $taskModal;
 
 //Invoked when form is submitted.
 function submitForm(event) {
 	event.preventDefault();
+	let fields = [];
 
 	switch (event.target.id) {
 		//Case Project Form
@@ -13,7 +15,7 @@ function submitForm(event) {
 			$projectModal = bootstrap.Modal.getInstance(document.getElementById("create-project-modal"));
 			let projectName = createProjectForm.querySelector("#project-name").value;
 
-			let fields = [projectName];
+			fields = [projectName];
 
 			if (!validateForm(fields)) return false;
 
@@ -24,7 +26,21 @@ function submitForm(event) {
 			break;
 		//Case Task Form
 		case "add-task-btn":
-			console.log(createTaskForm);
+			$taskModal = bootstrap.Modal.getInstance(document.getElementById("create-task-modal"));
+			let taskTitle = createTaskForm.querySelector("#task-title").value;
+			let taskDescription = createTaskForm.querySelector("#task-description").value;
+			let taskDate = createTaskForm.querySelector("#task-date").value;
+			let taskPriority = createTaskForm.querySelector("#task-priority").value;
+			let taskProject = createTaskForm.querySelector("#task-project").value;
+
+			fields = [taskTitle, taskDescription, taskDate, taskPriority, taskProject];
+
+			//if (!validateForm(fields)) return false;
+
+			addTask(taskTitle, taskDescription, taskDate, taskPriority, taskProject);
+
+			createTaskForm.reset();
+			$taskModal.hide();
 			break;
 	}
 }

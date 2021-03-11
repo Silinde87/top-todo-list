@@ -2,6 +2,7 @@ import css from "../styles/style.css";
 import { $projects } from "../index.js";
 import { createHtmlElement } from "../functions/tools.js";
 import { removeProject } from "./project";
+import { renderProjectListAtTaskModal } from "../modules/renderModals";
 
 let lateralMenuBarElem;
 let $removeIcons = [];
@@ -102,6 +103,7 @@ function renderProjectList(projects) {
 			removeProject(removeIconElem.dataset.id);
 			document.querySelector("#collapseOne").innerHTML = "";
 			document.querySelector("#collapseOne").appendChild(renderProjectList($projects));
+			renderProjectListAtTaskModal(document.querySelector("#task-project"));
 		};
 	});
 

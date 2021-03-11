@@ -1,4 +1,5 @@
 import { generateID } from "../functions/tools.js";
+import { $tasks } from "../index.js";
 
 // -- TASK OBJECT (Factory) --
 const Task = (title, description, scheduleDate, project, priority) => {
@@ -38,3 +39,9 @@ const Task = (title, description, scheduleDate, project, priority) => {
 		setPriorityFromTask,
 	};
 };
+
+function addTask(title, description, scheduleDate, project, priority) {
+	$tasks.push(Task(title, description, scheduleDate, project, priority));
+}
+
+export { addTask };

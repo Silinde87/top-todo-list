@@ -100,15 +100,9 @@ function createTaskModal() {
 	const labelTaskProject = createHtmlElement("label", null, ["form-label"], "Project");
 	labelTaskProject.setAttribute("for", "task-project");
 	const inputTaskProject = createHtmlElement("select", "task-project", ["form-control"], null);
-	inputTaskProject.innerHTML = `<option disabled selected> -- Select project -- </option>`;
-
-	$projects.forEach((project) => {
-		//Get every project from projects.
-		const projectOption = createHtmlElement("option", null, null, project.getProjectName());
-		projectOption.setAttribute("value", project.getProjectName());
-		inputTaskProject.appendChild(projectOption);
-	});
-
+	
+	renderProjectListAtTaskModal(inputTaskProject);
+	
 	formGroupTaskProject.appendChild(labelTaskProject);
 	formGroupTaskProject.appendChild(inputTaskProject);
 
@@ -161,4 +155,17 @@ function createModalElement(id) {
 	return modalElem;
 }
 
-export { createProjectModal, createTaskModal, createProjectForm, createTaskForm };
+//Renders the project list at task modal
+function renderProjectListAtTaskModal(inputTaskProjectElem){	
+	console.log(inputTaskProjectElem);
+	
+	inputTaskProjectElem.innerHTML = `<option disabled selected> -- Select project -- </option>`;	
+	$projects.forEach((project) => {
+		//Get every project from projects.
+		const projectOption = createHtmlElement("option", null, null, project.getProjectName());
+		projectOption.setAttribute("value", project.getProjectName());
+		inputTaskProjectElem.appendChild(projectOption);
+	});
+}
+
+export { createProjectModal, createTaskModal, renderProjectListAtTaskModal, createProjectForm, createTaskForm,  };

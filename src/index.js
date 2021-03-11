@@ -1,6 +1,6 @@
 import css from "./styles/root.css";
 import { createProjectModal } from "./modules/renderModals.js";
-import { createTaskModal } from "./modules/renderModals.js";
+import { createTaskModal, renderProjectListAtTaskModal } from "./modules/renderModals.js";
 import { Project } from "./modules/project.js";
 import { renderNavBar } from "./modules/renderNavBar.js";
 import { renderLateralMenuBar, renderProjectList } from "./modules/renderLateralMenuBar.js";
@@ -9,6 +9,7 @@ import { submitForm, cleanForm } from "./modules/form.js";
 
 const $content = document.querySelector("#content");
 let $projects = [];
+let $tasks = [];
 
 //Creating Projects for testing
 $projects.push(Project("Project One"));
@@ -35,6 +36,7 @@ document.querySelector("#add-project-btn").onclick = (e) => {
 	submitForm(e);
 	document.querySelector("#collapseOne").innerHTML = "";
 	document.querySelector("#collapseOne").appendChild(renderProjectList($projects));
+	renderProjectListAtTaskModal(document.querySelector("#task-project"));
 };
 //Adds new task.
 document.querySelector("#add-task-btn").onclick = (e) => {
@@ -45,4 +47,4 @@ document.querySelector("#add-task-btn").onclick = (e) => {
 document.querySelector("#create-project-modal").addEventListener("hidden.bs.modal", (e) => cleanForm(e));
 document.querySelector("#create-task-modal").addEventListener("hidden.bs.modal", (e) => cleanForm(e));
 
-export { $projects };
+export { $projects, $tasks };
