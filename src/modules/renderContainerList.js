@@ -1,48 +1,55 @@
 import { createHtmlElement } from "../functions/tools.js";
-import { $tasks } from "../index.js";
 
-let containerListElem;
+let containerListElem, headerListElem, bodyListElem;
 
 //TODO RENDER CONTAINER LIST
 
 function renderContainerList(event) {
 	containerListElem = createHtmlElement("div", "container-list", null, null);
-	const headerListElem = createHtmlElement("nav", "header-list", null, null);
-	const bodyListElem = createHtmlElement("div", "body-list", null, null);
+	headerListElem = createHtmlElement("nav", "header-list", null, null);
+	bodyListElem = createHtmlElement("div", "body-list", null, null);
 
-	//Header	
+	//Header
 	const titleHeaderElem = createHtmlElement("p", "title-header-list", null, null);
+	//First time render or home button
 	if (!event || (event && event.target.id === "home-btn")) {
 		titleHeaderElem.innerText = "Inbox";
-	} else if(event !== undefined){
-		console.log(event.target);
+		//When lateral button is pressed
+	} else if (event !== undefined) {
+		console.log(event.target.innerText);
 		titleHeaderElem.innerText = event.target.innerText;
 		containerListElem.classList.add("toggle-container");
 	}
-
 	headerListElem.appendChild(titleHeaderElem);
 
-	//Body
+	//Body	
 
 	containerListElem.appendChild(headerListElem);
-	containerListElem.appendChild(bodyListElem);	
+	containerListElem.appendChild(bodyListElem);
 
 	return containerListElem;
 }
 
 //Test purposes
-function renderList() {
-	const testElem = createHtmlElement("ul", null, null, null);
-	if ($tasks.length > 0) {
-		$tasks.forEach((elem) => {
-			console.log(elem.getTitle());
-			let liElem = createHtmlElement("li", null, null, elem.getTitle());
-			console.log(liElem);
-			testElem.appendChild(liElem);
-			console.log(testElem);
-		});
-	}
-	return testElem;
+function showTasks(tasksList) {
+	console.log(tasksList);
+	bodyListElem.innerHTML = "";
+	tasksList.forEach((task) => {
+		const rowTask = createHtmlElement("tr", null, ["task-row"], null);
+		rowTask.dataset.id = task.getId();
+		const circleColumnTask = createHtmlElement("td", null, null, null);
+		const circleTask = createHtmlElement("div", null, ["circle-task"], null);
+		circleColumnTask.appendChild(circleTask);
+		const titleColumTask = createHtmlElement("td", null, null, task.getTitle());
+		const editColumTask = createHtmlElement("div", null, ["task-icon"], null);
+		editColumTask.innerHTML = '<i class="bi bi-pen"></i>';
+
+		rowTask.appendChild(circleColumnTask);
+		rowTask.appendChild(titleColumTask);
+		rowTask.appendChild(editColumTask);
+
+		bodyListElem.appendChild(rowTask);
+	});
 }
 
-export { renderContainerList, renderList };
+export { renderContainerList, showTasks };

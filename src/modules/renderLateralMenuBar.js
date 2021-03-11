@@ -115,6 +115,12 @@ function renderProjectList(projects) {
 			document.querySelector("#collapseOne").appendChild(renderProjectList($projects));
 			renderProjectListAtTaskModal(document.querySelector("#task-project"));
 		};
+
+		//Render project page functionality
+		projectElem.onclick = (e) => {
+			let containerListElem = document.querySelector("#container-list");
+			containerListElem.replaceWith(renderContainerList(e));
+		}
 	});
 
 	return projectList;

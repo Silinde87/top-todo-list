@@ -1,7 +1,6 @@
 import { addProject } from "../modules/project.js";
 import { addTask } from "../modules/task.js";
 import { createProjectForm, createTaskForm } from "../modules/renderModals.js";
-import { renderList } from "./renderContainerList.js";
 
 let $projectModal, $taskModal;
 
@@ -40,8 +39,6 @@ function submitForm(event) {
 
 			addTask(taskTitle, taskDescription, taskDate, taskPriority, taskProject);
             
-            document.querySelector("#container-list").appendChild(renderList());
-
 			createTaskForm.reset();
 			$taskModal.hide();
 			break;

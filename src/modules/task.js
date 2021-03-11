@@ -44,4 +44,12 @@ function addTask(title, description, scheduleDate, project, priority) {
 	$tasks.push(Task(title, description, scheduleDate, project, priority));
 }
 
-export { addTask };
+function filterTaskByProject(taskList, project) {
+	if(project){
+		return taskList.filter(task => task.getProjectFromTask() == project.getProjectName());;
+	}else{
+		return taskList;
+	}
+}
+
+export { Task, addTask, filterTaskByProject };
