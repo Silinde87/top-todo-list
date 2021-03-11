@@ -3,7 +3,7 @@ import { $projects } from "../index.js";
 
 let createProjectForm, createTaskForm;
 
-//Generates the Create Project Modal
+//Generates the CREATE PROJECT Modal and returns it as DOM Element
 function createProjectModal() {
 	let createProjectModalElem = createModalElement("create-project-modal");
 
@@ -39,7 +39,7 @@ function createProjectModal() {
 	return createProjectModalElem;
 }
 
-//Generates the Create Task Modal
+//Generates the CREATE TASK Modal and returns it as DOM Element
 function createTaskModal() {
 	let createTaskModalElem = createModalElement("create-task-modal");
 

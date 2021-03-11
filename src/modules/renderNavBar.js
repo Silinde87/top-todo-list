@@ -1,8 +1,8 @@
-
 import { createHtmlElement } from "../functions/tools.js";
 
 let navBarElem;
 
+//Renders the NAVIGATION BAR and returns it as DOM Element
 function renderNavBar() {
 	navBarElem = createHtmlElement("nav", "nav-bar", null, null);
 

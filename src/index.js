@@ -1,12 +1,11 @@
 import css from "./styles/root.css";
+import { createProjectModal } from "./modules/renderModals.js";
+import { createTaskModal } from "./modules/renderModals.js";
 import { Project } from "./modules/project.js";
 import { renderNavBar } from "./modules/renderNavBar.js";
 import { renderLateralMenuBar, renderProjectList } from "./modules/renderLateralMenuBar.js";
 import { renderContainerList } from "./modules/renderContainerList.js";
-import { createProjectModal } from "./modules/renderModals.js";
-import { createTaskModal } from "./modules/renderModals.js";
-
-import { submitForm } from "./modules/form.js";
+import { submitForm, cleanForm } from "./modules/form.js";
 
 const $content = document.querySelector("#content");
 let $projects = [];
@@ -17,6 +16,7 @@ $projects.push(Project("Project Two"));
 $projects.push(Project("Project Three"));
 $projects.push(Project("Project Four"));
 
+//Invoking all renders.
 $content.appendChild(renderNavBar());
 $content.appendChild(renderLateralMenuBar());
 $content.appendChild(renderContainerList());
@@ -41,4 +41,8 @@ document.querySelector("#add-task-btn").onclick = (e) => {
 	submitForm(e);
 };
 
-export { $content, $projects };
+//Cleans modals when cancel button is pressed.
+document.querySelector("#create-project-modal").addEventListener("hidden.bs.modal", (e) => cleanForm(e));
+document.querySelector("#create-task-modal").addEventListener("hidden.bs.modal", (e) => cleanForm(e));
+
+export { $projects };

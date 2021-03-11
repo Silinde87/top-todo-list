@@ -22,13 +22,13 @@ export const Project = (name) => {
 	return { getProjectId, getProjectName, getProjectTasks, setProjectName, addTaskToProject };
 };
 
-function addProject(projectName) {	
-	$projects.push(Project(projectName));	
+function addProject(projectName) {
+	$projects.push(Project(projectName));
 }
 
-//Removes project from projects based on projectId
+//Removes project from $projects based on projectId
 function removeProject(projectId) {
-	$projects = $projects.filter(project => project.getProjectId() !== projectId);
+	$projects = $projects.filter((project) => project.getProjectId() !== projectId);
 }
 
 export { addProject, removeProject };

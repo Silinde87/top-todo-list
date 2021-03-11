@@ -6,7 +6,7 @@ import { removeProject } from "./project";
 let lateralMenuBarElem;
 let $removeIcons = [];
 
-//Creates lateral Menu Bar and returns the DOM Element
+//Creates LATERAL MENU BAR and returns it as DOM Element.
 function renderLateralMenuBar() {
 	lateralMenuBarElem = createHtmlElement("div", "lateral-bar", ["user-select-none"], null);
 
