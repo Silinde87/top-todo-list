@@ -9,6 +9,7 @@ const Task = (title, description, scheduleDate, project, priority) => {
 	let scheduleDateTask = scheduleDate;
 	let projectTask = project;
 	let priorityTask = priority;
+	let completed = false;
 
 	//getters
 	const getId = () => id;
@@ -17,6 +18,7 @@ const Task = (title, description, scheduleDate, project, priority) => {
 	const getScheduleDate = () => scheduleDateTask;
 	const getProjectFromTask = () => projectTask;
 	const getPriorityFromTask = () => priorityTask;
+	const isCompleted = () => completed;
 
 	//setters
 	const setTitle = (param) => (titleTask = param);
@@ -24,6 +26,7 @@ const Task = (title, description, scheduleDate, project, priority) => {
 	const setScheduleDate = (param) => (scheduleDateTask = param);
 	const setProjectFromTask = (param) => (projectTask = param);
 	const setPriorityFromTask = (param) => (priorityTask = param);
+	const setCompleted = () => (completed = !completed);
 
 	return {
 		getId,
@@ -37,6 +40,8 @@ const Task = (title, description, scheduleDate, project, priority) => {
 		setScheduleDate,
 		setProjectFromTask,
 		setPriorityFromTask,
+		isCompleted,
+		setCompleted,
 	};
 };
 
@@ -44,12 +49,25 @@ function addTask(title, description, scheduleDate, project, priority) {
 	$tasks.push(Task(title, description, scheduleDate, project, priority));
 }
 
-function filterTaskByProject(taskList, project) {
-	if(project){
-		return taskList.filter(task => task.getProjectFromTask() == project.getProjectName());;
-	}else{
+function filterTaskByProjectId(taskList, projectId) {
+	if (projectId) {
+		return taskList.filter((task) => task.getProjectFromTask().getProjectId() == projectId);
+	} else {
 		return taskList;
 	}
 }
 
-export { Task, addTask, filterTaskByProject };
+function filterTaskByCompleted(taskList) {
+	return taskList.filter((task) => task.isCompleted());
+}
+
+function filterTaskByDate(taskList, date) {
+	console.log(date);
+	if(date){		
+		return taskList.filter((task) => task.getScheduleDate() == date);
+	} else{
+		return taskList.filter(task => task.getScheduleDate() === null);
+	}
+}
+
+export { Task, addTask, filterTaskByProjectId, filterTaskByCompleted, filterTaskByDate };

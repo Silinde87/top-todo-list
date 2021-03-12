@@ -14,17 +14,17 @@ function renderLateralMenuBar() {
 
 	//Creates list's elements.
 	const listMenuElem = createHtmlElement("ul", "list-menu", null, null);
-	const inboxListElem = createHtmlElement("li", null, ["list-menu-elem"], null);
-	const todayListElem = createHtmlElement("li", null, ["list-menu-elem"], null);
+	const inboxListElem = createHtmlElement("li", "inbox-btn", ["list-menu-elem", "inbox"], null);
+	const todayListElem = createHtmlElement("li", "today-btn", ["list-menu-elem", "today"], null);
 	const projectsListElem = createHtmlElement("div", "projects-list", ["list-menu-elem"], null);
 
 	//Creates icons and text element for list's elements.
-	const inboxIconElem = createHtmlElement("span", "inbox-icon", ["menu-icon"], null);
-	inboxIconElem.innerHTML = '<i class="bi bi-inboxes"></i>';
-	const inboxTextElem = createHtmlElement("span", null, ["menu-text"], "Inbox");
-	const todayIconElem = createHtmlElement("span", "today-icon", ["menu-icon"], null);
-	todayIconElem.innerHTML = '<i class="bi bi-calendar-day"></i>';
-	const todayTextElem = createHtmlElement("span", null, ["menu-text"], "Today");
+	const inboxIconElem = createHtmlElement("span", "inbox-icon", ["menu-icon", "inbox"], null);
+	inboxIconElem.innerHTML = '<i class="bi bi-inboxes inbox"></i>';
+	const inboxTextElem = createHtmlElement("span", null, ["menu-text", "inbox"], "Inbox");
+	const todayIconElem = createHtmlElement("span", "today-icon", ["menu-icon", "today"], null);
+	todayIconElem.innerHTML = '<i class="bi bi-calendar-day today"></i>';
+	const todayTextElem = createHtmlElement("span", null, ["menu-text", "today"], "Today");
 	const projectsIconElem = createHtmlElement("span", null, ["menu-icon"], null);
 	projectsIconElem.innerHTML = '<i id="projects-icon" class="bi bi-chevron-down"></i>';
 	const projectsTextElem = createHtmlElement("span", "projects-text", ["menu-text"], "Projects");
@@ -72,15 +72,6 @@ function renderLateralMenuBar() {
 	projectsTextElem.onclick = () => document.querySelector("#projects-icon").classList.toggle("rotate");
 	projectsListElem.onmouseover = () => projectAddIconElem.classList.add("project-add-show");
 	projectsListElem.onmouseout = () => projectAddIconElem.classList.remove("project-add-show");
-	//Inbox and today event listeners from lateral bar.
-	inboxListElem.onclick = (e) => {
-		let containerListElem = document.querySelector("#container-list");
-		containerListElem.replaceWith(renderContainerList(e));
-	};
-	todayListElem.onclick = (e) => {
-		let containerListElem = document.querySelector("#container-list");
-		containerListElem.replaceWith(renderContainerList(e));
-	};
 
 	return lateralMenuBarElem;
 }
@@ -91,9 +82,10 @@ function renderProjectList(projects) {
 	$removeIcons = [];
 
 	projects.forEach((project) => {
-		const projectElem = createHtmlElement("li", null, ["accordion-list-elem"], null);
+		const projectElem = createHtmlElement("li", null, ["accordion-list-elem","project-name"], null);
 		projectElem.dataset.id = project.getProjectId();
-		const projectNameElem = createHtmlElement("span", null, null, project.getProjectName());
+		const projectNameElem = createHtmlElement("span", null, ["project-name"], project.getProjectName());
+		projectNameElem.dataset.id = project.getProjectId();
 		const removeIconElem = createHtmlElement("span", null, ["remove-icon"], null);
 		removeIconElem.dataset.id = project.getProjectId();
 		removeIconElem.innerHTML = '<i class="bi bi-dash-circle"></i>';
@@ -120,7 +112,7 @@ function renderProjectList(projects) {
 		projectElem.onclick = (e) => {
 			let containerListElem = document.querySelector("#container-list");
 			containerListElem.replaceWith(renderContainerList(e));
-		}
+		};
 	});
 
 	return projectList;

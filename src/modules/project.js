@@ -31,4 +31,10 @@ function removeProject(projectId) {
 	$projects = $projects.filter((project) => project.getProjectId() !== projectId);
 }
 
-export { addProject, removeProject };
+function getProjectNameByProjectId(projectId){
+	let newProjects = $projects.filter(project => project.getProjectId() === projectId)
+	let name = newProjects[0].getProjectName();
+	return name;
+}
+
+export { addProject, removeProject, getProjectNameByProjectId };

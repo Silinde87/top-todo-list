@@ -17,8 +17,8 @@ function renderNavBar() {
 	homeIconElem.innerHTML = '<i id="home-btn" class="bi bi-house-door"></i>';
 	const addIconElem = createHtmlElement("div", null, ["nav-icon"], null);
 	addIconElem.innerHTML = '<i class="bi bi-plus"></i>';
-	const completedIconElem = createHtmlElement("div", null, ["nav-icon"], null);
-	completedIconElem.innerHTML = '<i class="bi bi-calendar-check"></i>';
+	const completedIconElem = createHtmlElement("div", "completed-btn", ["nav-icon"], null);
+	completedIconElem.innerHTML = '<i id="completed-btn"class="bi bi-calendar-check"></i>';
 
 	//Modal attributes
 	addIconElem.setAttribute("data-bs-toggle", "modal");
