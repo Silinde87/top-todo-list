@@ -27,23 +27,24 @@ function renderContainerList(event) {
 	} else if (event.target.classList.contains("project-name")) {
 		let projectId = event.target.dataset.id;
 		titleHeaderElem.innerText = getProjectNameByProjectId(projectId);
-		showTasks(filterTaskByProjectId($tasks, projectId));
-		containerListElem.classList.add("toggle-container");
+		showTasks(filterTaskByProjectId($tasks, projectId));		
 
 	} else if(event.target.classList.contains("today")){
 		titleHeaderElem.innerText = "Tasks for today";
-		//TODO GET CURRENT DATE AND PARSE IT 
-		let date = "2021-03-12";	
-		showTasks(filterTaskByDate($tasks,date));
-
-		containerListElem.classList.add("toggle-container");
+		//TODO GET CURRENT DATE AND PARSE IT 		
+		let date = new Date(Date.now()).toDateString();		
+		showTasks(filterTaskByDate($tasks,date));	
 
 		//Show Lateral button is pressed (today and inbox)
 	}else if (event.target.classList.contains("inbox")) {
 		titleHeaderElem.innerText = "Inbox";
-		showTasks(filterTaskByDate($tasks,null));
+		showTasks(filterTaskByDate($tasks,null));		
+	}
+
+	if(document.querySelector("#lateral-bar").classList.contains("active-lateral-bar")){		
 		containerListElem.classList.add("toggle-container");
 	}
+
 
 	headerListElem.appendChild(titleHeaderElem);
 	containerListElem.appendChild(headerListElem);

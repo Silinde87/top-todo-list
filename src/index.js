@@ -22,11 +22,11 @@ $projects.push(project1);
 $projects.push(project2);
 $projects.push(project3);
 $projects.push(project4);
-$tasks.push(Task("Title 1", "Description 1", "2021-03-12", project1, "Low"));
-$tasks.push(Task("Title 2", "Description 2", "2021-05-05", project1, "Medium"));
-$tasks.push(Task("Title 3", "Description 3", "2019-05-05", project3, "High"));
-$tasks.push(Task("Title 4", "Description 4", "2017-05-05", project4, "Low"));
-$tasks.push(Task("Title 5", "Description 4", null, project4, "Low"));
+$tasks.push(Task("Title 1", "Description 1", new Date(Date.now()).toDateString(), project1, "Low"));
+$tasks.push(Task("Title 2", "Description 2", new Date("2021-05-05"), project1, "Medium"));
+$tasks.push(Task("Title 3", "Description 3", "", project3, "High"));
+$tasks.push(Task("Title 4", "Description 4", new Date("2017-05-05"), project4, "Low"));
+$tasks.push(Task("Title 5", "Description 4", "", project4, "Low"));
 
 //Invoking all renders.
 $content.appendChild(renderNavBar());

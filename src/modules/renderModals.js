@@ -161,7 +161,7 @@ function renderProjectListAtTaskModal(inputTaskProjectElem){
 	$projects.forEach((project) => {
 		//Get every project from projects.
 		const projectOption = createHtmlElement("option", null, null, project.getProjectName());
-		projectOption.setAttribute("value", project.getProjectName());
+		projectOption.setAttribute("value", project.getProjectId());
 		inputTaskProjectElem.appendChild(projectOption);
 	});
 }

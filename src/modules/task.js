@@ -46,12 +46,13 @@ const Task = (title, description, scheduleDate, project, priority) => {
 };
 
 function addTask(title, description, scheduleDate, project, priority) {
-	$tasks.push(Task(title, description, scheduleDate, project, priority));
+	$tasks.push(Task(title, description, new Date(scheduleDate).toDateString(), project, priority));
 }
 
-function filterTaskByProjectId(taskList, projectId) {
+function filterTaskByProjectId(taskList, projectId) {	
 	if (projectId) {
-		return taskList.filter((task) => task.getProjectFromTask().getProjectId() == projectId);
+		let list = taskList.filter((task) => task.getProjectFromTask() !== undefined);
+		return list.filter((task) => task.getProjectFromTask().getProjectId() == projectId);
 	} else {
 		return taskList;
 	}
@@ -61,12 +62,12 @@ function filterTaskByCompleted(taskList) {
 	return taskList.filter((task) => task.isCompleted());
 }
 
+//@param date: new Date().toDateString()
 function filterTaskByDate(taskList, date) {
-	console.log(date);
-	if(date){		
-		return taskList.filter((task) => task.getScheduleDate() == date);
-	} else{
-		return taskList.filter(task => task.getScheduleDate() === null);
+	if (date) {
+		return taskList.filter((task) => task.getScheduleDate() === date);
+	} else {
+		return taskList.filter((task) => task.getScheduleDate() === "");
 	}
 }
 

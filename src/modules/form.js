@@ -1,4 +1,4 @@
-import { addProject } from "../modules/project.js";
+import { addProject, getProjectById } from "../modules/project.js";
 import { addTask } from "../modules/task.js";
 import { createProjectForm, createTaskForm } from "../modules/renderModals.js";
 
@@ -29,15 +29,19 @@ function submitForm(event) {
 			$taskModal = bootstrap.Modal.getInstance(document.getElementById("create-task-modal"));
 			let taskTitle = createTaskForm.querySelector("#task-title").value;
 			let taskDescription = createTaskForm.querySelector("#task-description").value;
-			let taskDate = createTaskForm.querySelector("#task-date").value;
+			let taskDate = new Date(createTaskForm.querySelector("#task-date").value).toDateString();
 			let taskPriority = createTaskForm.querySelector("#task-priority").value;
-			let taskProject = createTaskForm.querySelector("#task-project").value;
+			let projectId = createTaskForm.querySelector("#task-project").value;
+			let taskProject = getProjectById(projectId);
 
-			fields = [taskTitle, taskDescription, taskDate, taskPriority, taskProject];
+			fields = [taskTitle, taskDescription, taskDate, taskProject, taskPriority];
 
+			console.log(taskDate);
+
+			//FORM TASK VALIDATION
 			//if (!validateForm(fields)) return false;
 
-			addTask(taskTitle, taskDescription, taskDate, taskPriority, taskProject);
+			addTask(taskTitle, taskDescription, taskDate, taskProject, taskPriority);
             
 			createTaskForm.reset();
 			$taskModal.hide();
@@ -45,10 +49,10 @@ function submitForm(event) {
 	}
 }
 
-//todo - Fill the form when edit button is clicked
+//TODO - Fill the form when edit button is clicked
 function fillForm() {}
 
-//todo - Validates all fields from form when submit
+//TODO - Validates all fields from form when submit
 function validateForm(fieldsForm) {
 	let flag = true;
 
