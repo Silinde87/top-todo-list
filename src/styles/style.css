@@ -115,16 +115,47 @@
     flex-direction: column;
     align-items: center;
     transition: padding .2s;
+    padding-top: 30px;
 }
 .toggle-container{
     padding-left: 335px;
 }
+#header-list{
+    border-bottom: 1px solid #444;
+    width: 70%;
+    margin-bottom: 15px;
+}
+#title-header-list{
+    font-size: 25px;
+    font-weight: bold;
+}
+#body-list{
+    border-collapse: collapse;
+    display: inline;
+    width: 70%;
+    padding: 0px 10px;
+}
+.task-row{    
+    border-bottom: 1px solid #ccc;    
+}
+.task-cell{    
+    text-align: center;
+    padding: 0px 5px;
+}
 .circle-task{
-    border: 1px solid black;
-    height: 15px;
-    width: 15px;
+    border: 1px solid #444;
+    height: 18px;
+    width: 18px;
     border-radius: 50%;
 }
 .circle-task:hover{
     background-color: #444;
+}
+.task-icon{
+    font-size: 20px;  
+}
+.task-title{
+    font-size: 18px;
+    width: 100%;
+    vertical-align: bottom;
 }

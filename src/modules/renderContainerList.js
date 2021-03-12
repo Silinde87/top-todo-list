@@ -15,7 +15,7 @@ let containerListElem, headerListElem, bodyListElem;
 function renderContainerList(event) {
 	containerListElem = createHtmlElement("div", "container-list", null, null);
 	headerListElem = createHtmlElement("nav", "header-list", null, null);
-	bodyListElem = createHtmlElement("div", "body-list", null, null);
+	bodyListElem = createHtmlElement("table", "body-list", null, null);
 
 	//Rendering
 	const titleHeaderElem = createHtmlElement("p", "title-header-list", null, null);
@@ -63,16 +63,16 @@ function showTasks(taskList) {
 	taskList.forEach((task) => {
 		const rowTask = createHtmlElement("tr", null, ["task-row"], null);
 		rowTask.dataset.id = task.getId();
-		const circleColumnTask = createHtmlElement("td", null, null, null);
+		const circleColumnTask = createHtmlElement("td", null, ["task-cell"], null);
 		const circleTask = createHtmlElement("div", null, ["circle-task"], null);
 		circleTask.dataset.id = task.getId();
 		circleColumnTask.appendChild(circleTask);
 		const titleColumnTask = createHtmlElement("td", null, ["task-title"], task.getTitle());
-		const editColumnTask = createHtmlElement("td", null, null, null);
+		const editColumnTask = createHtmlElement("td", null, ["task-cell"], null);
 		editColumnTask.innerHTML = '<i class="bi bi-pen task-icon"></i>';
-		const dateColumnTask = createHtmlElement("td", null, null, null);
+		const dateColumnTask = createHtmlElement("td", null, ["task-cell"], null);
 		dateColumnTask.innerHTML = '<i class="bi bi-calendar-plus task-icon"></i>';
-		const deleteColumnTask = createHtmlElement("td", null, null, null);
+		const deleteColumnTask = createHtmlElement("td", null, ["task-cell"], null);
 		deleteColumnTask.innerHTML = `<i class="bi bi-trash task-icon" data-id="${task.getId()}"></i>`;
 
 		rowTask.appendChild(circleColumnTask);
