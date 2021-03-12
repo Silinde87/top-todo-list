@@ -1,7 +1,13 @@
 import { createHtmlElement } from "../functions/tools.js";
 import { $tasks } from "../index.js";
 import { getProjectNameByProjectId } from "./project.js";
-import { filterTaskByCompleted, filterTaskByDate, filterTaskByProjectId } from "./task.js";
+import {
+	filterTaskByCompleted,
+	filterTaskByDate,
+	filterTaskByProjectId,
+	completeTask,
+	removeTask,
+} from "./task.js";
 
 let containerListElem, headerListElem, bodyListElem;
 
@@ -16,7 +22,7 @@ function renderContainerList(event) {
 	//First time render or home button
 	if (!event || (event && event.target.id === "home-btn")) {
 		titleHeaderElem.innerText = "Inbox";
-		showTasks(filterTaskByDate($tasks,null));
+		showTasks(filterTaskByDate($tasks, null));
 
 		//Completed button is pressed
 	} else if (event.target.id === "completed-btn") {
@@ -27,24 +33,22 @@ function renderContainerList(event) {
 	} else if (event.target.classList.contains("project-name")) {
 		let projectId = event.target.dataset.id;
 		titleHeaderElem.innerText = getProjectNameByProjectId(projectId);
-		showTasks(filterTaskByProjectId($tasks, projectId));		
-
-	} else if(event.target.classList.contains("today")){
+		showTasks(filterTaskByProjectId($tasks, projectId));
+	} else if (event.target.classList.contains("today")) {
 		titleHeaderElem.innerText = "Tasks for today";
-		//TODO GET CURRENT DATE AND PARSE IT 		
-		let date = new Date(Date.now()).toDateString();		
-		showTasks(filterTaskByDate($tasks,date));	
+		//TODO GET CURRENT DATE AND PARSE IT
+		let date = new Date(Date.now()).toDateString();
+		showTasks(filterTaskByDate($tasks, date));
 
 		//Show Lateral button is pressed (today and inbox)
-	}else if (event.target.classList.contains("inbox")) {
+	} else if (event.target.classList.contains("inbox")) {
 		titleHeaderElem.innerText = "Inbox";
-		showTasks(filterTaskByDate($tasks,null));		
+		showTasks(filterTaskByDate($tasks, null));
 	}
 
-	if(document.querySelector("#lateral-bar").classList.contains("active-lateral-bar")){		
+	if (document.querySelector("#lateral-bar").classList.contains("active-lateral-bar")) {
 		containerListElem.classList.add("toggle-container");
 	}
-
 
 	headerListElem.appendChild(titleHeaderElem);
 	containerListElem.appendChild(headerListElem);
@@ -61,6 +65,7 @@ function showTasks(taskList) {
 		rowTask.dataset.id = task.getId();
 		const circleColumnTask = createHtmlElement("td", null, null, null);
 		const circleTask = createHtmlElement("div", null, ["circle-task"], null);
+		circleTask.dataset.id = task.getId();
 		circleColumnTask.appendChild(circleTask);
 		const titleColumnTask = createHtmlElement("td", null, ["task-title"], task.getTitle());
 		const editColumnTask = createHtmlElement("td", null, null, null);
@@ -68,13 +73,23 @@ function showTasks(taskList) {
 		const dateColumnTask = createHtmlElement("td", null, null, null);
 		dateColumnTask.innerHTML = '<i class="bi bi-calendar-plus task-icon"></i>';
 		const deleteColumnTask = createHtmlElement("td", null, null, null);
-		deleteColumnTask.innerHTML = '<i class="bi bi-trash task-icon"></i>';
+		deleteColumnTask.innerHTML = `<i class="bi bi-trash task-icon" data-id="${task.getId()}"></i>`;
 
 		rowTask.appendChild(circleColumnTask);
 		rowTask.appendChild(titleColumnTask);
 		rowTask.appendChild(editColumnTask);
 		rowTask.appendChild(dateColumnTask);
 		rowTask.appendChild(deleteColumnTask);
+
+		//Event listeners from each button task
+		circleTask.onclick = (e) => {
+			completeTask(e.target.dataset.id);
+			e.target.parentNode.parentNode.remove();
+		};
+		deleteColumnTask.onclick = (e) => {
+			removeTask(e.target.dataset.id);
+			e.target.parentNode.parentNode.remove();
+		};
 
 		bodyListElem.appendChild(rowTask);
 	});

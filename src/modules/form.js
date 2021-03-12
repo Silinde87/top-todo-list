@@ -36,8 +36,6 @@ function submitForm(event) {
 
 			fields = [taskTitle, taskDescription, taskDate, taskProject, taskPriority];
 
-			console.log(taskDate);
-
 			//FORM TASK VALIDATION
 			//if (!validateForm(fields)) return false;
 

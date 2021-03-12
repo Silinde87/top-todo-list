@@ -1,6 +1,5 @@
 import css from "./styles/root.css";
-import { createProjectModal } from "./modules/renderModals.js";
-import { createTaskModal, renderProjectListAtTaskModal } from "./modules/renderModals.js";
+import { createProjectModal, createTaskModal, renderProjectListAtTaskModal } from "./modules/renderModals.js";
 import { Project } from "./modules/project.js";
 import { renderNavBar } from "./modules/renderNavBar.js";
 import { renderLateralMenuBar, renderProjectList } from "./modules/renderLateralMenuBar.js";
@@ -70,7 +69,10 @@ document.querySelector("#add-project-btn").onclick = (e) => {
 };
 //Adds NEW TASK.
 document.querySelector("#add-task-btn").onclick = (e) => {
+	console.log(document.querySelector("#task-project"));
 	submitForm(e);
+	//TODO SHOW PROJECT PAGE WHEN NEW TASK IS SUBMITTED
+	//containerListElem.replaceWith(renderContainerList(document.querySelector("#task-project")));
 };
 
 //Cleans modals when cancel button is pressed.
