@@ -30,10 +30,15 @@ function renderContainerList(event) {
 		showTasks(filterTaskByCompleted($tasks));
 
 		//Project from project list is pressed
-	} else if (event.target.classList.contains("project-name")) {
-		let projectId = event.target.dataset.id;
-		titleHeaderElem.innerText = getProjectNameByProjectId(projectId);
-		showTasks(filterTaskByProjectId($tasks, projectId));
+	} else if (event.target.classList.contains("project-name") || event.target.id === "add-task-btn") {		
+		let projectId = event.target.dataset.id;		
+		if(projectId.includes("project")){			
+			titleHeaderElem.innerText = "Inbox";
+			showTasks(filterTaskByDate($tasks, null));
+		} else {
+			titleHeaderElem.innerText = getProjectNameByProjectId(projectId);
+			showTasks(filterTaskByProjectId($tasks, projectId));
+		}
 	} else if (event.target.classList.contains("today")) {
 		titleHeaderElem.innerText = "Tasks for today";
 		//TODO GET CURRENT DATE AND PARSE IT
@@ -41,7 +46,7 @@ function renderContainerList(event) {
 		showTasks(filterTaskByDate($tasks, date));
 
 		//Show Lateral button is pressed (today and inbox)
-	} else if (event.target.classList.contains("inbox")) {
+	} else if (event.target.classList.contains("inbox") || event.target.classList.contains("bi-dash-circle")) {
 		titleHeaderElem.innerText = "Inbox";
 		showTasks(filterTaskByDate($tasks, null));
 	}
@@ -82,10 +87,12 @@ function showTasks(taskList) {
 		rowTask.appendChild(deleteColumnTask);
 
 		//Event listeners from each button task
+		//Complete a task
 		circleTask.onclick = (e) => {
 			completeTask(e.target.dataset.id);
 			e.target.parentNode.parentNode.remove();
 		};
+		//Remove a task
 		deleteColumnTask.onclick = (e) => {
 			removeTask(e.target.dataset.id);
 			e.target.parentNode.parentNode.remove();

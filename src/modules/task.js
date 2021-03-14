@@ -45,8 +45,15 @@ const Task = (title, description, scheduleDate, project, priority) => {
 	};
 };
 
+//Add new Task object to tasks array. If no date, adds an empty string as a date.
 function addTask(title, description, scheduleDate, project, priority) {
-	$tasks.push(Task(title, description, new Date(scheduleDate).toDateString(), project, priority));
+	let newTask;
+	if(scheduleDate === ""){
+		newTask = Task(title, description, "", project, priority);
+	} else {
+		newTask = Task(title, description, new Date(scheduleDate).toDateString(), project, priority);
+	}
+	$tasks.push(newTask);
 }
 
 function filterTaskByProjectId(taskList, projectId) {
@@ -59,10 +66,12 @@ function filterTaskByProjectId(taskList, projectId) {
 	}
 }
 
+//Returns a new array with every completed task
 function filterTaskByCompleted(taskList) {
 	return taskList.filter((task) => task.isCompleted());
 }
 
+//Returns a new array with every not completed task
 function filterTaskByNotCompleted(taskList){	
 	return taskList.filter((task) => !task.isCompleted())
 }
@@ -81,9 +90,15 @@ function removeTask(taskId) {
 	$tasks = $tasks.filter((task) => task.getId() !== taskId);
 }
 
+//Removes all tasks from a single project, based on projectId parameter
+function removeAllTasksFromProject(projectId){
+	$tasks = $tasks.filter((task) => task.getProjectFromTask().getProjectId() !== projectId);
+}
+
+//Swaps isCompleted property from task pased as parameter.
 function completeTask(taskId) {
 	$tasks.find(task => task.getId() == taskId).setCompleted();	
 }
 
 
-export { Task, addTask, filterTaskByProjectId, filterTaskByCompleted, filterTaskByDate, completeTask, removeTask };
+export { Task, addTask, filterTaskByProjectId, filterTaskByCompleted, filterTaskByDate, completeTask, removeTask,removeAllTasksFromProject };

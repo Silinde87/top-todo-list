@@ -29,18 +29,22 @@ function submitForm(event) {
 			$taskModal = bootstrap.Modal.getInstance(document.getElementById("create-task-modal"));
 			let taskTitle = createTaskForm.querySelector("#task-title").value;
 			let taskDescription = createTaskForm.querySelector("#task-description").value;
-			let taskDate = new Date(createTaskForm.querySelector("#task-date").value).toDateString();
+			let taskDate = createTaskForm.querySelector("#task-date").value;			
+			if (taskDate !== "")		
+				taskDate = new Date(createTaskForm.querySelector("#task-date").value).toDateString();				
 			let taskPriority = createTaskForm.querySelector("#task-priority").value;
 			let projectId = createTaskForm.querySelector("#task-project").value;
 			let taskProject = getProjectById(projectId);
 
 			fields = [taskTitle, taskDescription, taskDate, taskProject, taskPriority];
-
-			//FORM TASK VALIDATION
+			
+			//TODO FORM TASK VALIDATION
 			//if (!validateForm(fields)) return false;
 
 			addTask(taskTitle, taskDescription, taskDate, taskProject, taskPriority);
-            
+
+			document.querySelector("#add-task-btn").dataset.id = projectId;
+
 			createTaskForm.reset();
 			$taskModal.hide();
 			break;

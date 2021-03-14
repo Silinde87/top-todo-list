@@ -68,15 +68,14 @@ document.querySelector("#add-project-btn").onclick = (e) => {
 	renderProjectListAtTaskModal(document.querySelector("#task-project"));
 };
 //Adds NEW TASK.
-document.querySelector("#add-task-btn").onclick = (e) => {
-	console.log(document.querySelector("#task-project"));
+document.querySelector("#add-task-btn").onclick = (e) => {	
 	submitForm(e);
-	//TODO SHOW PROJECT PAGE WHEN NEW TASK IS SUBMITTED
-	//containerListElem.replaceWith(renderContainerList(document.querySelector("#task-project")));
+	let containerListElem = $content.querySelector("#container-list");
+	containerListElem.replaceWith(renderContainerList(e));
 };
 
 //Cleans modals when cancel button is pressed.
 document.querySelector("#create-project-modal").addEventListener("hidden.bs.modal", (e) => cleanForm(e));
 document.querySelector("#create-task-modal").addEventListener("hidden.bs.modal", (e) => cleanForm(e));
 
-export { $projects, $tasks };
+export { $projects, $tasks, $content };
