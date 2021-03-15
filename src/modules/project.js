@@ -32,7 +32,7 @@ function removeProject(projectId) {
 }
 
 function getProjectNameByProjectId(projectId) {
-	let newProjects = $projects.filter((project) => project.getProjectId() === projectId);
+	let newProjects = $projects.filter((project) => project.getProjectId() === projectId);	
 	let name = newProjects[0].getProjectName();
 	return name;
 }

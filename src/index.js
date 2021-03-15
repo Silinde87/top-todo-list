@@ -25,7 +25,7 @@ $tasks.push(Task("Title 1", "Description 1", new Date(Date.now()).toDateString()
 $tasks.push(Task("Title 2", "Description 2", new Date("2021-05-05"), project1, "Medium"));
 $tasks.push(Task("Title 3", "Description 3", "", project3, "High"));
 $tasks.push(Task("Title 4", "Description 4", new Date("2017-05-05"), project4, "Low"));
-$tasks.push(Task("Title 5", "Description 4", "", project4, "Low"));
+$tasks.push(Task("Title 5", "Description 4", "", project4, ""));
 
 //Invoking all renders.
 $content.appendChild(renderNavBar());

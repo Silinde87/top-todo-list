@@ -84,7 +84,7 @@ function renderProjectList(projects) {
 
 	projects.forEach((project) => {
 		const projectElem = createHtmlElement("li", null, ["accordion-list-elem", "project-name"], null);
-		projectElem.dataset.id = project.getProjectId();
+		projectElem.dataset.id = project.getProjectId();		
 		const projectNameElem = createHtmlElement("span", null, ["project-name"], project.getProjectName());
 		projectNameElem.dataset.id = project.getProjectId();
 		const removeIconElem = createHtmlElement("span", null, ["remove-icon"], null);
@@ -115,7 +115,7 @@ function renderProjectList(projects) {
 		//Render project page functionality
 		projectElem.onclick = (e) => {
 			let containerListElem = document.querySelector("#container-list");
-			containerListElem.replaceWith(renderContainerList(e));
+			containerListElem.replaceWith(renderContainerList(e));			
 		};
 	});
 

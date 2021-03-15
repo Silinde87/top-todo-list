@@ -88,7 +88,7 @@ function createTaskModal() {
 	labelTaskPriority.setAttribute("for", "task-priority");
 	const inputTaskPriority = createHtmlElement("select", "task-priority", ["form-control"], null);
 	inputTaskPriority.innerHTML = `
-    <option disabled selected> -- Select priority -- </option>
+    <option value="none" disabled selected> -- Select priority -- </option>
     <option value="Low">Low</option>
     <option value="Medium">Medium</option>
     <option value="High">High</option>`;
@@ -99,7 +99,7 @@ function createTaskModal() {
 	const formGroupTaskProject = createHtmlElement("div", null, ["mb-3"], null);
 	const labelTaskProject = createHtmlElement("label", null, ["form-label"], "Project");
 	labelTaskProject.setAttribute("for", "task-project");
-	const inputTaskProject = createHtmlElement("select", "task-project", ["form-control"], null);
+	const inputTaskProject = createHtmlElement("select", "task-project", ["form-control"], null);	
 	
 	renderProjectListAtTaskModal(inputTaskProject);
 	
@@ -157,9 +157,9 @@ function createModalElement(id) {
 
 //Renders the project list at task modal
 function renderProjectListAtTaskModal(inputTaskProjectElem){		
-	inputTaskProjectElem.innerHTML = `<option disabled selected> -- Select project -- </option>`;	
-	$projects.forEach((project) => {
-		//Get every project from projects.
+	inputTaskProjectElem.innerHTML = `<option value="none" disabled selected> -- Select project -- </option>`;	
+	$projects.forEach((project) => {		
+		//Get every project from projects.		
 		const projectOption = createHtmlElement("option", null, null, project.getProjectName());
 		projectOption.setAttribute("value", project.getProjectId());
 		inputTaskProjectElem.appendChild(projectOption);

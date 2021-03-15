@@ -1,5 +1,6 @@
 import { createHtmlElement } from "../functions/tools.js";
 import { $tasks } from "../index.js";
+import { fillForm } from "./form.js";
 import { getProjectNameByProjectId } from "./project.js";
 import {
 	filterTaskByCompleted,
@@ -30,14 +31,17 @@ function renderContainerList(event) {
 		showTasks(filterTaskByCompleted($tasks));
 
 		//Project from project list is pressed
-	} else if (event.target.classList.contains("project-name") || event.target.id === "add-task-btn") {		
-		let projectId = event.target.dataset.id;		
-		if(projectId.includes("project")){			
+	} else if (event.target.classList.contains("project-name") || event.target.id === "add-task-btn") {
+		let projectId = event.target.dataset.id;
+		if (projectId.includes("project")) {
 			titleHeaderElem.innerText = "Inbox";
 			showTasks(filterTaskByDate($tasks, null));
-		} else {
+		} else if (projectId.includes("_")) {
 			titleHeaderElem.innerText = getProjectNameByProjectId(projectId);
 			showTasks(filterTaskByProjectId($tasks, projectId));
+		} else if ((document.querySelector("#task-project").value = "none")) {
+			titleHeaderElem.innerText = "Inbox";
+			showTasks(filterTaskByDate($tasks, null));
 		}
 	} else if (event.target.classList.contains("today")) {
 		titleHeaderElem.innerText = "Tasks for today";
@@ -46,7 +50,10 @@ function renderContainerList(event) {
 		showTasks(filterTaskByDate($tasks, date));
 
 		//Show Lateral button is pressed (today and inbox)
-	} else if (event.target.classList.contains("inbox") || event.target.classList.contains("bi-dash-circle")) {
+	} else if (
+		event.target.classList.contains("inbox") ||
+		event.target.classList.contains("bi-dash-circle")
+	) {
 		titleHeaderElem.innerText = "Inbox";
 		showTasks(filterTaskByDate($tasks, null));
 	}
@@ -74,7 +81,9 @@ function showTasks(taskList) {
 		circleColumnTask.appendChild(circleTask);
 		const titleColumnTask = createHtmlElement("td", null, ["task-title"], task.getTitle());
 		const editColumnTask = createHtmlElement("td", null, ["task-cell"], null);
-		editColumnTask.innerHTML = '<i class="bi bi-pen task-icon"></i>';
+		editColumnTask.innerHTML = `<i class="bi bi-pen task-icon" data-id="${task.getId()}"></i>`;
+		//editColumnTask.setAttribute("data-bs-toggle", "modal");
+		//editColumnTask.setAttribute("data-bs-target","#create-task-modal");
 		const dateColumnTask = createHtmlElement("td", null, ["task-cell"], null);
 		dateColumnTask.innerHTML = '<i class="bi bi-calendar-plus task-icon"></i>';
 		const deleteColumnTask = createHtmlElement("td", null, ["task-cell"], null);
@@ -92,6 +101,15 @@ function showTasks(taskList) {
 			completeTask(e.target.dataset.id);
 			e.target.parentNode.parentNode.remove();
 		};
+		editColumnTask.onclick = (e) => {
+			fillForm(e);
+			document.querySelector("#create-task-modal").querySelector(".modal-title").innerText =
+				"Edit Task";
+			document.querySelector("#add-task-btn").innerText = "Save";
+			document.querySelector("#add-task-btn").setAttribute("data-id", e.target.dataset.id);
+			new bootstrap.Modal(document.getElementById("create-task-modal")).show();
+		};
+
 		//Remove a task
 		deleteColumnTask.onclick = (e) => {
 			removeTask(e.target.dataset.id);
