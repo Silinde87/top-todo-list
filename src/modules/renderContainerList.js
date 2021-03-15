@@ -77,30 +77,35 @@ function showTasks(taskList) {
 		rowTask.dataset.id = task.getId();
 		const circleColumnTask = createHtmlElement("td", null, ["task-cell"], null);
 		const circleTask = createHtmlElement("div", null, ["circle-task"], null);
+		circleTask.innerHTML = `<i class="bi bi-check done-icon" data-id="${task.getId()}"></i>`;
 		circleTask.dataset.id = task.getId();
 		circleColumnTask.appendChild(circleTask);
 		const titleColumnTask = createHtmlElement("td", null, ["task-title"], task.getTitle());
 		const editColumnTask = createHtmlElement("td", null, ["task-cell"], null);
 		editColumnTask.innerHTML = `<i class="bi bi-pen task-icon" data-id="${task.getId()}"></i>`;
-		//editColumnTask.setAttribute("data-bs-toggle", "modal");
-		//editColumnTask.setAttribute("data-bs-target","#create-task-modal");
-		const dateColumnTask = createHtmlElement("td", null, ["task-cell"], null);
-		dateColumnTask.innerHTML = '<i class="bi bi-calendar-plus task-icon"></i>';
+		//const dateColumnTask = createHtmlElement("td", null, ["task-cell"], null);
+		//dateColumnTask.innerHTML = '<i class="bi bi-calendar-plus task-icon"></i>';
 		const deleteColumnTask = createHtmlElement("td", null, ["task-cell"], null);
 		deleteColumnTask.innerHTML = `<i class="bi bi-trash task-icon" data-id="${task.getId()}"></i>`;
+
+		if (task.isCompleted()){
+			circleTask.innerHTML = `<i class="bi bi-check done-icon done-icon-active" data-id="${task.getId()}"></i>`;
+		} 
 
 		rowTask.appendChild(circleColumnTask);
 		rowTask.appendChild(titleColumnTask);
 		rowTask.appendChild(editColumnTask);
-		rowTask.appendChild(dateColumnTask);
+		//rowTask.appendChild(dateColumnTask);
 		rowTask.appendChild(deleteColumnTask);
 
 		//Event listeners from each button task
 		//Complete a task
 		circleTask.onclick = (e) => {
 			completeTask(e.target.dataset.id);
-			e.target.parentNode.parentNode.remove();
+			document.querySelector(`[data-id="${e.target.dataset.id}"]`).remove();
 		};
+		circleTask.onmouseover = () => document.querySelector(".done-icon").classList.toggle("done-icon-active");
+		circleTask.onmouseout = () => document.querySelector(".done-icon").classList.toggle("done-icon-active");
 		editColumnTask.onclick = (e) => {
 			fillForm(e);
 			document.querySelector("#create-task-modal").querySelector(".modal-title").innerText =

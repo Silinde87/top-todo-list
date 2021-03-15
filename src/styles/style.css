@@ -13,6 +13,7 @@
     color: #FFFFFF;
     font-size: 22px;    
     padding: 0px 4px;
+    cursor: pointer;
 }
 .nav-icon:hover{
     background-color: #E27065;
@@ -38,6 +39,7 @@
     padding: 4px 0px 4px 6px;
     transition: background-color .3s;
     display: flex;
+    cursor: pointer;
 }
 .list-menu-elem:hover,
 .accordion-list-elem:hover{
@@ -92,6 +94,7 @@
     margin-right: 4px;
     min-width: 260px;
     color: #444;
+    cursor: pointer;
 }
 .remove-icon{
     float: right;
@@ -140,22 +143,41 @@
 }
 .task-cell{    
     text-align: center;
-    padding: 0px 5px;
+    cursor: pointer;
 }
 .circle-task{
     border: 1px solid #444;
     height: 18px;
     width: 18px;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .circle-task:hover{
-    background-color: #444;
+    background-color: rgb(236, 236, 236);
+}
+.done-icon{
+    opacity: 0;
+    padding-top: 2px;
+    transition: opacity 0.2s ease;
+    color: #444;
+}
+.done-icon-active{
+    opacity: 1;
 }
 .task-icon{
-    font-size: 20px;  
+    font-size: 20px;
+    padding: 2px 4px;
+    transition: background-color 0.2s ease;
+}
+.task-icon:hover{
+    background-color: rgb(236, 236, 236);
+    border-radius: 3px;
 }
 .task-title{
     font-size: 18px;
     width: 100%;
     vertical-align: bottom;
+    user-select: none;
 }
